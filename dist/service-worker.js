@@ -1,2 +1,0 @@
-'use strict';const b=["speedometer-static-2018120701"];addEventListener("install",(a)=>{a.waitUntil((async()=>{await (await caches.open("speedometer-static-2018120701")).addAll(["./","./images/speedometer.png"]);self.skipWaiting()})())});addEventListener("activate",(a)=>{a.waitUntil((async()=>{for(const a of await caches.keys())a.startsWith("speedometer-")&&(b.includes(a)||await caches.delete(a))})())});
-addEventListener("fetch",(a)=>{new URL(a.request.url);a.respondWith(caches.match(a.request).then((c)=>c||fetch(a.request)))});
