@@ -22,6 +22,7 @@
     "build:minify": "yarn html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --removeAttributeQuotes --remove-tag-whitespace --removeOptionalTags --minify-css true --output ./dist/index.html ./dist/index.html",
     "build:smaller": "rm -rf ./dist/*.css && rm -rf ./dist/index.js",
     "dist": "yarn clean && yarn copy && yarn build:js && yarn build:sw && yarn build:inline:css && yarn build:inline:js && yarn build:minify && yarn build:smaller",
+    "postdist": "rm -rf docs && mv dist docs",
     "dist:analytics": "yarn dist && cat ./analytics.txt >> ./dist/index.html"
   },
   "devDependencies": {

@@ -15,7 +15,7 @@ const appOpts = {
     showMph: document.querySelector('#show-mph'),
     showKmh: document.querySelector('#show-kmh'),
   },
-  readoutUnit: readoutUnits.mph,
+  readoutUnit: readoutUnits.kmh,
   watchId: null,
   wakeLock: null
 };
