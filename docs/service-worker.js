@@ -1,2 +1,33 @@
-'use strict';const b=["speedometer-static-2018120701"];addEventListener("install",(a)=>{a.waitUntil((async()=>{await (await caches.open("speedometer-static-2018120701")).addAll(["./","./images/speedometer.png"]);self.skipWaiting()})())});addEventListener("activate",(a)=>{a.waitUntil((async()=>{for(const a of await caches.keys())a.startsWith("speedometer-")&&(b.includes(a)||await caches.delete(a))})())});
-addEventListener("fetch",(a)=>{new URL(a.request.url);a.respondWith(caches.match(a.request).then((c)=>c||fetch(a.request)))});
+const version = 2018120701;
+const cachePrefix = 'speedometer-';
+const staticCacheName = `${cachePrefix}static-${version}`;
+const expectedCaches = [staticCacheName];
+
+addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(staticCacheName);
+
+    await cache.addAll([
+      './',
+      './images/speedometer.png'
+    ]);
+
+    self.skipWaiting();
+  })());
+});
+
+addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    for (const cacheName of await caches.keys()) {
+      if (!cacheName.startsWith(cachePrefix)) continue;
+      if (!expectedCaches.includes(cacheName)) await caches.delete(cacheName);
+    }
+  })());
+});
+
+addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+  event.respondWith(
+    caches.match(event.request).then(r => r || fetch(event.request))
+  );
+});
