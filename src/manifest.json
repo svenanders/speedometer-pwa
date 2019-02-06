@@ -6,7 +6,7 @@
   "theme_color": "#f1f1f1",
   "background_color": "#f1f1f1",
   "icons": [{
-    "src": "images/speedometer.png",
+    "src": "/speedometer-pwa/images/speedometer.png",
     "sizes": "512x512",
     "type": "image/png"
   }],
